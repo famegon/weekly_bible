@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성경 공과 참고 구절</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #faf0e6 0%, #f5e6d3 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(15px); 
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+            border: 1px solid rgba(220, 210, 200, 0.3); 
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 35px;
+            background: linear-gradient(135deg, #d2b48c 0%, #c1a075 50%, #b08d5e 100%); 
+            color: white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+        
+        .course-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        
+        .course-date {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 4px; 
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .course-number {
+            font-size: 1em;
+            opacity: 0.8; 
+            font-style: italic;
+            text-align: center;
+            margin-top: 2px; 
+            margin-bottom: 0; /* 설명이 없으므로 하단 마진 제거 또는 최소화 */
+            position: relative;
+            z-index: 1;
+        }
+        
+        .question-group {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border-left: 4px solid #b08d5e; 
+            box-shadow: 0 4px 15px rgba(176, 141, 94, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .question-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(176, 141, 94, 0.15);
+        }
+        
+        .question-number {
+            background: linear-gradient(135deg, #c0a080 0%, #b08d5e 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(176, 141, 94, 0.3);
+        }
+        
+        .verse {
+            background: white;
+            padding: 20px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 210, 200, 0.7); 
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verse::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #c0a080 0%, #b08d5e 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .verse:hover {
+            box-shadow: 0 8px 20px rgba(176, 141, 94, 0.12);
+            border-color: #b08d5e; 
+            transform: translateY(-1px);
+        }
+        
+        .verse:hover::before {
+            opacity: 1;
+        }
+        
+        .verse-text {
+            font-size: 1.1em;
+            color: #5a4d41; 
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-weight: 400;
+            white-space: pre-line;
+        }
+        
+        .verse-reference {
+            font-weight: 600;
+            color: #a07d50; 
+            font-size: 1em;
+            text-align: right;
+        }
+        
+        .search-box {
+            position: sticky;
+            top: 15px; 
+            z-index: 100;
+            margin-bottom: 20px; 
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 24px;
+            border: 2px solid rgba(200, 180, 160, 0.7); 
+            border-radius: 50px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #b08d5e; 
+            background: white;
+            box-shadow: 0 0 0 3px rgba(176, 141, 94, 0.1);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 5px; 
+                padding: 20px; 
+            }
+            
+            .course-title {
+                font-size: 1.5em; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="course-title">어떤 스승을 따라야 할까?</div>
+            <div class="course-date">2025년 5월 18일</div> 
+            <div class="course-number"><i>20th</i></div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="구절이나 문제 번호로 검색..." id="searchInput">
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">본문</div>
+            <div class="verse">
+                <div class="verse-text">
+                     3   때가 이르리니 사람이 바른 교훈을 받지 아니하며 귀가 가려워서 자기의 사욕을 따를 스승을 많이 두고
+                     4   또 그 귀를 진리에서 돌이켜 허탄한 이야기를 따르리라
+                </div>
+                <div class="verse-reference">디모데후서 4:3-4</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 3-(1)</div>
+            <div class="verse">
+                <div class="verse-text">
+                    16   이에 헤롯이 박사들에게 속은 줄 알고 심히 노하여 사람을 보내어 베들레헴과 그 모든 지경 안에 있는 사내아이를 박사들에게 자세히 알아본 그 때를 기준하여 두 살부터 그 아래로 다 죽이니
+                </div>
+                <div class="verse-reference">마태복음 2:16</div>
+            </div>
+            <div class="verse">
+                <div class="verse-text">
+                    23   헤롯이 영광을 하나님께로 돌리지 아니하는고로 주의 사자가 곧 치니 충이 먹어 죽으니라
+                </div>
+                <div class="verse-reference">사도행전 12:23</div>
+            </div>
+            <div class="verse">
+                <div class="verse-text">
+                    8   헤롯이 예수를 보고 매우 기뻐하니 이는 그의 소문을 들었으므로 보고자 한 지 오래였고 또한 무엇이나 이적 행하심을 볼까 바랐던 연고러라
+                    9   여러 말로 물으나 아무 말도 대답하지 아니하시니
+                </div>
+                <div class="verse-reference">누가복음 23:8-9</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 3-(3)</div>
+            <div class="verse">
+                <div class="verse-text">
+                    16 너는 네 형제의 아내의 하체를 범하지 말라 이는 네 형제의 하체니라
+                </div>
+                <div class="verse-reference">레위기 18:16</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 3-(4)번</div>
+            <div class="verse">
+                <div class="verse-text">
+                    4   이는 요한이 헤롯에게 말하되 당신이 그 여자를 차지한 것이 옳지 않다 하였음이라
+                </div>
+                <div class="verse-reference">마태복음 14:4</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 3-(5)번</div>
+            <div class="verse">
+                <div class="verse-text">
+                    11 내가 진실로 너희에게 말하노니 여자가 낳은 자 중에 세례 요한보다 큰 이가 일어남이 없도다 그러나 천국에서는 극히 작은 자라도 그보다 크니라
+                </div>
+                <div class="verse-reference">마태복음 11:11</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 3-(8)번</div>
+            <div class="verse">
+                <div class="verse-text">
+                    3 예레미야가 그들에게 대답하되 너희는 시드기야에게 이같이 말하라
+                </div>
+                <div class="verse-reference">예레미야 21:3</div>
+            </div>
+            <div class="verse">
+                <div class="verse-text">
+                    6 선지자 예레미야가 이 모든 말씀을 예루살렘에서 유다의 시드기야 왕에게 아뢰니라
+                </div>
+                <div class="verse-reference">예레미야 34:6</div>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-number">문제 4-(3)번</div>
+            <div class="verse">
+                <div class="verse-text">
+                    8 내가 여호와를 항상 내 앞에 모심이여 그가 나의 오른쪽에 계시므로 내가 흔들리지 아니하리로다
+                </div>
+                <div class="verse-reference">시편 16:8</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding: 30px; background: linear-gradient(135deg, rgba(245, 2
