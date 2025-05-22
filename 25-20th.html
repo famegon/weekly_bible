@@ -142,7 +142,7 @@
         }
         
         .verse-text {
-            font-size: 1.1em;
+            font-size: 1.1em; /* 기본 구절 글씨 크기 */
             color: #5a4d41; 
             margin-bottom: 12px;
             line-height: 1.6;
@@ -169,7 +169,7 @@
             padding: 16px 24px;
             border: 2px solid rgba(200, 180, 160, 0.7); 
             border-radius: 50px;
-            font-size: 0.9em;
+            font-size: 1em;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
@@ -190,6 +190,11 @@
             
             .course-title {
                 font-size: 1.5em; 
+            }
+
+            /* 모바일에서 성경 구절 글씨 크기 조정 */
+            .verse-text {
+                font-size: 0.8em; /* 또는 0.95em 등 적절한 크기로 조절 */
             }
         }
     </style>
@@ -301,10 +306,11 @@
                 📚 공과 공부에 도움이 되길 바랍니다 🙏
             </p>
             <p style="color: #a08d7c; font-size: 0.95em;">
-                궁금한 점이 있으면 언제든 문의하세요
+                오류, 피드백 -> 구역장
             </p>
         </div>
-    </div> <script>
+    </div> 
+    <script>
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
