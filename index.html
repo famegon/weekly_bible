@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2청년부부 공과 모음</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <button id="menuToggleButton" class="menu-toggle-button">☰</button>
+    <div class="overlay"></div>
+
+    <nav id="sidebarMenu" class="sidebar-menu">
+        <h3>목록</h3>
+        <ul id="archiveLinks">
+            </ul>
+    </nav>
+
+    <div id="mainContentWrapper" class="main-content-wrapper">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="현재 페이지 내용에서 검색..." id="searchInput">
+            </div>
+
+            <section class="page-specific-content"> 
+                <div class="header">
+                    <div class="course-title">영원히 행복하게 사는 방법</div>
+                    <div class="course-date">2025년 5월 25일</div> 
+                    <div class="course-number"><i>21st</i></div>
+                </div>
+    
+                <div class="question-group">
+                    <div class="question-number">본문</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            12   영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니
+                        </div>
+                        <div class="verse-reference">요한복음 1:12</div>
+                    </div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question-number">문제 1</div>
+                    <div class="verse">
+                        <div class="verse-text"> (문제 1 관련 구절 내용) </div>
+                        <div class="verse-reference">(문제 1 구절 출처)</div>
+                    </div>
+                </div>
+                </section>
+    
+            <footer class="footer">
+                <p>📚 공과 공부에 도움이 되길 바랍니다 🙏</p>
+            </footer>
+        </div> 
+    </div>
+
+    <script src="menuData.js"></script> 
+    <script>
+        const menuToggleButton = document.getElementById('menuToggleButton');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const overlay = document.querySelector('.overlay');
+        const searchInput = document.getElementById('searchInput');
+        const archiveLinksUl = document.getElementById('archiveLinks');
+
+        // 메뉴 생성 (menuData.js의 weeklyBibleStudies 배열 사용)
+        if (typeof weeklyBibleStudies !== 'undefined' && weeklyBibleStudies.length > 0) {
+            // menuData.js 에 입력된 순서대로 (보통 최신이 위)
+            // 또는 여기서 날짜순 정렬 weeklyBibleStudies.sort((a,b) => new Date(b.date) - new Date(a.date));
+            
+            weeklyBibleStudies.forEach((study, index) => { // index 추가
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = study.file; 
+                link.innerHTML = `<span class="title">${study.title}</span><span class="date">${study.date} - <i>${study.number}</i></span>`;
+                
+                const currentPath = window.location.pathname;
+                const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+
+                // index.html 이고, 현재 study가 배열의 첫번째 (최신) 항목이라면 active
+                if ((currentFile === '' || currentFile === 'index.html') && index === 0 && weeklyBibleStudies[0].file === 'index.html') { 
+                     // menuData.js의 첫번째 항목 file이 'index.html'일 경우 index.html에서 활성화
+                    link.classList.add('active-page-link');
+                } else if (currentFile === '' && study.file === weeklyBibleStudies[0].file && index === 0) {
+                    // index.html로 접속했고, study.file이 최신 파일명과 같으면 (menuData.js의 첫번째 항목)
+                     link.classList.add('active-page-link');
+                }
+                // 또는 현재 파일명이 study.file과 일치하면 active
+                else if (currentFile === study.file) {
+                    link.classList.add('active-page-link');
+                }
+
+
+                listItem.appendChild(link);
+                archiveLinksUl.appendChild(listItem);
+            });
+        } else {
+            archiveLinksUl.innerHTML = '<li>메뉴 데이터가 없습니다.</li>';
+        }
+
+        menuToggleButton.addEventListener('click', function() {
+            sidebarMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', function() { 
+            sidebarMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        // 검색 기능 (현재 페이지의 .page-specific-content 내부만 검색)
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const questionGroups = document.querySelectorAll('.page-specific-content .question-group');
+            
+            questionGroups.forEach(group => {
+                const groupText = group.textContent.toLowerCase();
+                if (groupText.includes(searchTerm)) {
+                    group.style.display = 'block'; 
+                    group.style.background = searchTerm ? 'linear-gradient(135deg, #fff5e1 0%, #ffeccf 100%)' : 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+                } else {
+                    group.style.display = searchTerm ? 'none' : 'block'; 
+                    group.style.background = 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+                }
+            });
+        });
+
+        // 기존 구절 클릭 효과
+        document.querySelectorAll('.verse').forEach(verse => {
+            verse.addEventListener('click', function() {
+                this.style.transform = 'scale(1.015)'; 
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)'; 
+                }, 150); 
+            });
+        });
+    </script>
+</body>
+</html>
