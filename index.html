@@ -116,10 +116,10 @@
                                 if (specificContent) {
                                     contentContainer.innerHTML = specificContent.innerHTML;
                                     // 페이지 타이틀도 최신 주차 제목으로 업데이트
-                                    const loadedTitle = contentContainer.querySelector('.course-title');
-                                    if (loadedTitle && pageTitleElement) {
-                                        pageTitleElement.textContent = `${latestStudy.number}: ${loadedTitle.textContent.trim()} - 성경 공과`;
-                                    }
+                                    // const loadedTitle = contentContainer.querySelector('.course-title');
+                                    // if (loadedTitle && pageTitleElement) {
+                                    //     pageTitleElement.textContent = `${latestStudy.number}: ${loadedTitle.textContent.trim()} - 성경 공과`;
+                                    // }
                                     // 동적으로 로드된 .verse 요소들에 클릭 이벤트 리스너 다시 바인딩
                                     attachVerseClickListeners('#latestWeekContentContainer .verse');
                                 } else {
