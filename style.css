@@ -99,7 +99,8 @@
         .question-group {
             background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%);
             border-radius: 16px; padding: 24px; margin: 20px 0;
-            border-left: 4px solid #b08d5e; 
+/*             border-left: 4px solid #b08d5e;  */
+            border: 2px soild #b08d5e;   
             box-shadow: 0 4px 15px rgba(176, 141, 94, 0.1);
             transition: all 0.3s ease;
         }
