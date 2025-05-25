@@ -1,0 +1,152 @@
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #faf0e6 0%, #f5e6d3 100%);
+            min-height: 100vh;
+            position: relative; 
+            overflow-x: hidden; 
+            padding-top: 80px; /* 메뉴 버튼+검색창 공간 확보 */
+        }
+        .menu-toggle-button {
+            position: fixed; top: 20px; left: 20px; z-index: 1002; 
+            background-color: rgba(210, 180, 140, 0.7); color: white; 
+            border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px;
+            font-size: 1.4em; line-height: 1; border-radius: 8px; cursor: pointer;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-toggle-button:hover { background-color: rgba(176, 141, 94, 0.9); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+
+        .sidebar-menu {
+            position: fixed; top: 0; left: 0; width: 280px; height: 100%;
+            background: #fdfbf7; border-right: 1px solid rgba(220, 210, 200, 0.5);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1); transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out; z-index: 1001; 
+            padding-top: 70px; overflow-y: auto; 
+        }
+        .sidebar-menu.open { transform: translateX(0); }
+        .sidebar-menu h3 {
+            padding: 15px 20px 10px; font-size: 1.2em; color: #705c3d;
+            border-bottom: 1px solid rgba(220, 210, 200, 0.5); margin-bottom: 10px;
+        }
+        .sidebar-menu ul { list-style: none; padding: 0; }
+        .sidebar-menu li a {
+            display: block; padding: 12px 20px; text-decoration: none; color: #5a4d41;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(240, 230, 220, 0.7);
+        }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active-page-link { /* 현재 페이지 링크 스타일 */
+            background-color: rgba(210, 180, 140, 0.2); color: #b08d5e; font-weight: bold;
+        }
+        .sidebar-menu li a .date { font-size: 0.8em; opacity: 0.7; display: block; margin-top: 2px;}
+        .sidebar-menu li a .title { font-weight: 500; }
+        .sidebar-menu li a.active-page-link .title { font-weight: bold; }
+
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); z-index: 1000; 
+            opacity: 0; visibility: hidden; 
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .overlay.active { opacity: 1; visibility: visible; }
+        
+        .main-content-wrapper { padding: 15px; } /* 사이드바 열릴 때 밀리지 않음 */
+        
+        .container {
+            max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(15px); border-radius: 24px; padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(220, 210, 200, 0.3); 
+        }
+
+        .search-box { position: sticky; top: 15px; z-index: 100; margin-bottom: 30px; }
+        
+        .search-input {
+            width: 100%; padding: 16px 24px; border: 2px solid rgba(200, 180, 160, 0.7); 
+            border-radius: 50px; font-size: 1em; transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px);
+        }
+        .search-input:focus {
+            outline: none; border-color: #b08d5e; background: white;
+            box-shadow: 0 0 0 3px rgba(176, 141, 94, 0.1);
+        }
+
+        /* .page-specific-content 클래스 추가하여 해당 주차 내용 감싸기 */
+        .page-specific-content .header { /* 주차별 헤더 */
+            text-align: center; margin-bottom: 40px; padding: 35px;
+            background: linear-gradient(135deg, #d2b48c 0%, #c1a075 50%, #b08d5e 100%); 
+            color: white; border-radius: 20px; position: relative; overflow: hidden;
+        }
+        .page-specific-content .header::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+        .page-specific-content .course-title {
+            font-size: 2em; font-weight: 700; margin-bottom: 12px;
+            position: relative; z-index: 1; text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        .page-specific-content .course-date {
+            font-size: 1.1em; opacity: 0.95; margin-bottom: 4px; 
+            position: relative; z-index: 1; font-weight: 500;
+        }
+        .page-specific-content .course-number {
+            font-size: 1em; opacity: 0.8; font-style: italic; text-align: center;
+            margin-top: 2px; margin-bottom: 0; position: relative; z-index: 1;
+        }
+        
+        /* 나머지 .question-group, .verse 등 스타일은 이전과 동일 */
+        .question-group {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%);
+            border-radius: 16px; padding: 24px; margin: 20px 0;
+            border-left: 4px solid #b08d5e; 
+            box-shadow: 0 4px 15px rgba(176, 141, 94, 0.1);
+            transition: all 0.3s ease;
+        }
+        .question-group:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(176, 141, 94, 0.15); }
+        .question-number {
+            background: linear-gradient(135deg, #c0a080 0%, #b08d5e 100%);
+            color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.9em;
+            font-weight: 600; display: inline-block; margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(176, 141, 94, 0.3);
+        }
+        .verse {
+            background: white; padding: 20px; margin: 12px 0; border-radius: 12px;
+            border: 1px solid rgba(220, 210, 200, 0.7); transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .verse::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(135deg, #c0a080 0%, #b08d5e 100%);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .verse:hover { box-shadow: 0 8px 20px rgba(176, 141, 94, 0.12); border-color: #b08d5e; transform: translateY(-1px); }
+        .verse:hover::before { opacity: 1; }
+        .verse-text {
+            font-size: 1.1em; color: #5a4d41; margin-bottom: 12px;
+            line-height: 1.6; font-weight: 400; white-space: pre-line;
+        }
+        .verse-reference { font-weight: 600; color: #a07d50; font-size: 1em; text-align: right; }
+        
+        .footer {
+            text-align: center; margin-top: 50px; padding: 30px; 
+            background: linear-gradient(135deg, rgba(245, 239, 233, 0.8) 0%, rgba(239, 232, 224, 0.8) 100%); 
+            border-radius: 20px; backdrop-filter: blur(10px); 
+            border: 1px solid rgba(220, 210, 200, 0.4);
+        }
+        .footer p:first-child { color: #857363; font-style: italic; font-size: 1em; margin-bottom: 8px; }
+        
+        @media (max-width: 768px) { 
+            .sidebar-menu { width: 250px; }
+            body { padding-top: 70px; }
+            .search-box { top: 10px; }
+        }
+        @media (max-width: 600px) {
+            .container { margin: 0 auto; padding: 20px; }
+            .page-specific-content .course-title { font-size: 1.5em; }
+            .verse-text { font-size: 0.8em; }
+            .menu-toggle-button { top: 15px; left: 15px; padding: 6px 10px; font-size: 1.2em; }
+            .sidebar-menu { padding-top: 60px; }
+            body { padding-top: 60px; }
+            .search-box { top: 5px; }
+        }
