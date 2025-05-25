@@ -3,17 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2청년부부 공과 모음</title> 
-    <link rel="stylesheet" href="style.css"> 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4ZNLXJ9BR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Z4ZNLXJ9BR');
-</script>
+    <title>주간 성경 공과 모음</title> <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
     <button id="menuToggleButton" class="menu-toggle-button">☰</button>
@@ -28,35 +18,12 @@
     <div id="mainContentWrapper" class="main-content-wrapper">
         <div class="container">
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="현재 페이지 내용에서 검색..." id="searchInput">
+                <input type="text" class="search-input" placeholder="최신 주차 내용에서 검색..." id="searchInput">
             </div>
 
-            <section class="page-specific-content"> 
-                <div class="header">
-                    <div class="course-title">영원히 행복하게 사는 방법</div>
-                    <div class="course-date">2025년 5월 25일</div> 
-                    <div class="course-number"><i>21st</i></div>
-                </div>
-    
-                <div class="question-group">
-                    <div class="question-number">본문</div>
-                    <div class="verse">
-                        <div class="verse-text">
-                            12   영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니
-                        </div>
-                        <div class="verse-reference">요한복음 1:12</div>
-                    </div>
-                </div>
-                
-                <div class="question-group">
-                    <div class="question-number">문제 1</div>
-                    <div class="verse">
-                        <div class="verse-text"> (문제 1 관련 구절 내용) </div>
-                        <div class="verse-reference">(문제 1 구절 출처)</div>
-                    </div>
-                </div>
-                </section>
-    
+            <main id="latestWeekContentContainer" class="page-specific-content">
+                <p style="text-align:center; padding: 50px 0; color: #777;">최신 주차 내용을 불러오는 중입니다...</p>
+            </main>
             <footer class="footer">
                 <p>📚 공과 공부에 도움이 되길 바랍니다 🙏</p>
             </footer>
@@ -70,78 +37,180 @@
         const overlay = document.querySelector('.overlay');
         const searchInput = document.getElementById('searchInput');
         const archiveLinksUl = document.getElementById('archiveLinks');
+        const contentContainer = document.getElementById('latestWeekContentContainer');
+        const pageTitleElement = document.querySelector('head title');
 
-        // 메뉴 생성 (menuData.js의 weeklyBibleStudies 배열 사용)
-        if (typeof weeklyBibleStudies !== 'undefined' && weeklyBibleStudies.length > 0) {
-            // menuData.js 에 입력된 순서대로 (보통 최신이 위)
-            // 또는 여기서 날짜순 정렬 weeklyBibleStudies.sort((a,b) => new Date(b.date) - new Date(a.date));
-            
-            weeklyBibleStudies.forEach((study, index) => { // index 추가
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = study.file; 
-                link.innerHTML = `<span class="title">${study.title}</span><span class="date">${study.date} - <i>${study.number}</i></span>`;
-                
-                const currentPath = window.location.pathname;
-                const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+        // --- 메뉴 생성 함수 ---
+        function generateSidebarMenu() {
+            if (typeof weeklyBibleStudies !== 'undefined' && weeklyBibleStudies.length > 0) {
+                archiveLinksUl.innerHTML = ''; // 기존 메뉴 초기화
+                const studiesToDisplay = [...weeklyBibleStudies]; // 원본 유지를 위해 복사 (필요시 정렬)
+                // 예: studiesToDisplay.sort((a,b) => new Date(b.date) - new Date(a.date)); // 최신순 정렬
 
-                // index.html 이고, 현재 study가 배열의 첫번째 (최신) 항목이라면 active
-                if ((currentFile === '' || currentFile === 'index.html') && index === 0 && weeklyBibleStudies[0].file === 'index.html') { 
-                     // menuData.js의 첫번째 항목 file이 'index.html'일 경우 index.html에서 활성화
-                    link.classList.add('active-page-link');
-                } else if (currentFile === '' && study.file === weeklyBibleStudies[0].file && index === 0) {
-                    // index.html로 접속했고, study.file이 최신 파일명과 같으면 (menuData.js의 첫번째 항목)
-                     link.classList.add('active-page-link');
-                }
-                // 또는 현재 파일명이 study.file과 일치하면 active
-                else if (currentFile === study.file) {
-                    link.classList.add('active-page-link');
-                }
+                studiesToDisplay.forEach((study, index) => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = study.file; 
+                    link.innerHTML = `<span class="title">${study.title}</span><span class="date">${study.date} - <i>${study.number}</i></span>`;
+                    
+                    const currentPath = window.location.pathname;
+                    const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1);
 
+                    // index.html이고, 현재 study가 배열의 첫번째 (최신) 항목이거나,
+                    // 또는 현재 파일명이 study.file과 일치하면 active
+                    if (((currentFile === '' || currentFile === 'index.html') && index === 0) || currentFile === study.file) {
+                        link.classList.add('active-page-link');
+                    }
 
-                listItem.appendChild(link);
-                archiveLinksUl.appendChild(listItem);
-            });
-        } else {
-            archiveLinksUl.innerHTML = '<li>메뉴 데이터가 없습니다.</li>';
+                    listItem.appendChild(link);
+                    archiveLinksUl.appendChild(listItem);
+                });
+            } else {
+                archiveLinksUl.innerHTML = '<li>메뉴 데이터가 없습니다.</li>';
+            }
         }
 
-        menuToggleButton.addEventListener('click', function() {
-            sidebarMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
+        // --- 구절 클릭 이벤트 리스너 부착 함수 ---
+        function attachVerseClickListeners(selector) {
+            document.querySelectorAll(selector).forEach(verse => {
+                if (verse.dataset.listenerAttached === 'true') return;
+                verse.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.015)'; 
+                    setTimeout(() => { this.style.transform = 'scale(1)'; }, 150); 
+                });
+                verse.dataset.listenerAttached = 'true';
+            });
+        }
 
-        overlay.addEventListener('click', function() { 
-            sidebarMenu.classList.remove('open');
-            overlay.classList.remove('active');
-        });
+        // --- 최신 주차 내용 동적 로드 함수 (index.html 에서만 실행되도록 설계) ---
+        function loadLatestWeekContent() {
+            const currentPageFilename = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+            // index.html 이거나 루트 경로일 때만 실행
+            if (currentPageFilename === 'index.html' || currentPageFilename === '') {
+                if (typeof weeklyBibleStudies !== 'undefined' && weeklyBibleStudies.length > 0) {
+                    const latestStudy = weeklyBibleStudies[0]; // menuData.js에서 첫 번째 항목이 최신
 
-        // 검색 기능 (현재 페이지의 .page-specific-content 내부만 검색)
+                    if (latestStudy && latestStudy.file && contentContainer) {
+                        fetch(latestStudy.file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status} for ${latestStudy.file}`);
+                                }
+                                return response.text();
+                            })
+                            .then(htmlText => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(htmlText, 'text/html');
+                                const specificContent = doc.querySelector('.page-specific-content');
+                                
+                                if (specificContent) {
+                                    contentContainer.innerHTML = specificContent.innerHTML;
+                                    // 페이지 타이틀도 최신 주차 제목으로 업데이트
+                                    const loadedTitle = contentContainer.querySelector('.course-title');
+                                    if (loadedTitle && pageTitleElement) {
+                                        pageTitleElement.textContent = `${latestStudy.number}: ${loadedTitle.textContent.trim()} - 성경 공과`;
+                                    }
+                                    // 동적으로 로드된 .verse 요소들에 클릭 이벤트 리스너 다시 바인딩
+                                    attachVerseClickListeners('#latestWeekContentContainer .verse');
+                                } else {
+                                    contentContainer.innerHTML = `<p style="text-align:center; color:red;">최신 내용을 불러오는 데 실패했습니다. '${latestStudy.file}' 파일에 '.page-specific-content' 영역이 있는지 확인해주세요.</p>`;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('최신 내용 로드 중 오류:', error);
+                                contentContainer.innerHTML = `<p style="text-align:center; color:red;">최신 내용을 불러오는 중 오류가 발생했습니다. 개발자 콘솔을 확인해주세요. (${error})</p>`;
+                            });
+                    } else {
+                         contentContainer.innerHTML = '<p style="text-align:center; color:red;">최신 주차 정보를 찾을 수 없습니다. menuData.js를 확인해주세요.</p>';
+                    }
+                } else {
+                    contentContainer.innerHTML = '<p style="text-align:center; color:red;">메뉴 데이터를 불러올 수 없습니다. menuData.js를 확인해주세요.</p>';
+                }
+            } else {
+                // index.html이 아닌 다른 페이지에서는 이미 .page-specific-content 가 있으므로, 해당 요소의 verse에만 리스너 부착
+                 attachVerseClickListeners('.page-specific-content .verse');
+            }
+        }
+
+        // --- 검색 기능 ---
         searchInput.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
-            const questionGroups = document.querySelectorAll('.page-specific-content .question-group');
+            let questionGroups;
+            const currentPageFilenameForSearch = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+
+            if (currentPageFilenameForSearch === 'index.html' || currentPageFilenameForSearch === '') {
+                questionGroups = document.querySelectorAll('#latestWeekContentContainer .question-group');
+            } else {
+                questionGroups = document.querySelectorAll('.page-specific-content .question-group');
+            }
             
+            let matchFound = false;
             questionGroups.forEach(group => {
                 const groupText = group.textContent.toLowerCase();
                 if (groupText.includes(searchTerm)) {
                     group.style.display = 'block'; 
                     group.style.background = searchTerm ? 'linear-gradient(135deg, #fff5e1 0%, #ffeccf 100%)' : 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+                    matchFound = true;
                 } else {
-                    group.style.display = searchTerm ? 'none' : 'block'; 
+                    group.style.display = 'none'; 
                     group.style.background = 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
                 }
             });
+            // 검색 결과 없을 때 메시지 (선택 사항)
+            // if (!matchFound && searchTerm) { ... }
         });
 
-        // 기존 구절 클릭 효과
-        document.querySelectorAll('.verse').forEach(verse => {
-            verse.addEventListener('click', function() {
-                this.style.transform = 'scale(1.015)'; 
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)'; 
-                }, 150); 
-            });
+        // --- 초기화 함수 실행 ---
+        generateSidebarMenu(); // 메뉴 생성
+        loadLatestWeekContent(); // index.html일 경우 최신 내용 로드, 아니면 기존 verse 리스너 부착
+
+        // 메뉴 토글 및 오버레이
+        menuToggleButton.addEventListener('click', function() {
+            sidebarMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
         });
+        overlay.addEventListener('click', function() { 
+            sidebarMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
     </script>
 </body>
 </html>
+```
+
+**주요 수정 및 추가 사항:**
+
+1.  **`index.html`의 메인 콘텐츠 영역**:
+    * `<section class="page-specific-content">` 대신 `<main id="latestWeekContentContainer" class="page-specific-content">`로 변경했습니다. `main` 태그를 사용하고, 기존 스타일을 일부 재활용할 수 있도록 `page-specific-content` 클래스도 유지했습니다.
+    * 초기에는 "최신 주차 내용을 불러오는 중입니다..." 라는 메시지를 표시합니다.
+
+2.  **JavaScript 로직 상세화**:
+    * **`generateSidebarMenu()`**: 사이드바 메뉴를 생성하는 함수입니다.
+    * **`attachVerseClickListeners(selector)`**: 특정 선택자 내의 `.verse` 요소들에 클릭 이벤트를 바인딩하는 함수입니다. 동적으로 콘텐츠가 로드된 후에도 호출할 수 있도록 함수화했습니다. 중복 바인딩을 막기 위한 간단한 장치(`dataset.listenerAttached`)도 추가했습니다.
+    * **`loadLatestWeekContent()`**: `index.html`일 경우에만 `menuData.js`의 첫 번째 항목(최신 주차)의 HTML 파일을 `fetch`로 가져와 `#latestWeekContentContainer`에 내용을 채우고, 페이지 타이틀도 업데이트합니다. 내용 로드 후 `attachVerseClickListeners`를 호출하여 새로 생긴 구절에도 클릭 효과가 적용되도록 합니다. `index.html`이 아닌 다른 페이지에서는 기존처럼 해당 페이지의 `.page-specific-content .verse`에 리스너를 부착합니다.
+    * **검색 기능**: `index.html`에서는 `#latestWeekContentContainer` 내부를, 다른 주차별 페이지에서는 `.page-specific-content` 내부를 검색하도록 수정했습니다.
+    * **초기화**: 페이지 로드 시 `generateSidebarMenu()`와 `loadLatestWeekContent()`를 호출합니다.
+
+**매주 하실 일:**
+
+1.  **새로운 주차 HTML 파일 만들기**: (예: `25-22nd.html`)
+    * 이 파일은 이전의 "주차별 페이지 템플릿" (`bibleStudyHelper`의 최종 형태)을 기반으로 만듭니다. 즉, `<section class="page-specific-content">` 안에 해당 주차의 실제 내용을 모두 포함하고 있어야 합니다.
+    * `<title>` 태그를 해당 주차에 맞게 수정합니다.
+    * 이 파일에도 `style.css` 링크, `menuData.js` 스크립트, 그리고 메뉴 생성 및 검색/클릭 효과를 위한 JavaScript가 모두 포함되어 있어야 합니다. (템플릿을 복사하면 자연스럽게 포함됩니다.)
+2.  **`menuData.js` 파일 수정**:
+    * `weeklyBibleStudies` 배열의 **맨 위에** 새로운 주차 정보를 추가합니다.
+        ```javascript
+        // menuData.js
+        const weeklyBibleStudies = [
+            { title: "22주차 새 주제", date: "...", number: "22nd", file: "25-22nd.html" },
+            { title: "영원히 행복하게 사는 방법", date: "...", number: "21st", file: "25-21st.html" },
+            // ... (이하 생략)
+        ];
+        ```
+3.  **`index.html` 파일은 수정할 필요 없음**: JavaScript가 알아서 `menuData.js`의 최신 내용을 가져와 보여줍니다.
+4.  **GitHub에 업로드**: 새로 만든 주차 HTML 파일과 수정된 `menuData.js` 파일을 업로드합니다. (`index.html`은 변경되지 않았으므로 다시 올릴 필요 없습니다.)
+
+이제 `index.html`은 이 코드로 교체하시고, 각 주차별 파일(예: `25-20th.html`, `25-21st.html`)은 이전 템플릿을 기반으로 실제 내용을 담고 있도록 구성하시면 됩니다.
+
+이 방식으로 진행하시면 `index.html`을 매주 업데이트하는 번거로움이 사라집
