@@ -1,5 +1,12 @@
 // menuData.js
 const weeklyBibleStudies = [
+    // 22주차
+    { 
+        title: "하나님이 마음에 들어하시는 사람의 인성", 
+        date: "2025년 6월 1일",
+        number: "22nd", 
+        file: "25-22nd.html"
+    },
     // 21주차
     { 
         title: "영원히 행복하게 사는 방법", 
