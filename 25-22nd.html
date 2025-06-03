@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21st</title> 
+    <link rel="stylesheet" href="style.css"> 
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4ZNLXJ9BR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-Z4ZNLXJ9BR');
+    </script>
+</head>
+<body>
+    <button id="menuToggleButton" class="menu-toggle-button">☰</button>
+    <div class="overlay"></div>
+
+    <nav id="sidebarMenu" class="sidebar-menu">
+        <h3>목록</h3>
+        <ul id="archiveLinks">
+            </ul>
+    </nav>
+
+    <div id="mainContentWrapper" class="main-content-wrapper">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="현재 페이지 내용에서 검색..." id="searchInput">
+            </div>
+
+            <section class="page-specific-content"> 
+                <div class="header">
+                    <div class="course-title">하나님이 마음에 들어하시는 사람의 인성</div>
+                    <div class="course-date">2025년 6월 1일</div> 
+                    <div class="course-number"><i>22nd</i></div>
+                </div>
+    
+                <div class="question-group">
+                    <div class="question-number">본문</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            1   사울이 죽은 후에 다윗이 아말렉 사람을 쳐죽이고 돌아와 다윗이 시글락에서 이틀을 머물더니
+                            2   사흘째 되는 날에 한 사람이 사울의 진영에서 나왔는데 그의 옷은 찢어졌고 머리에는 흙이 있더라 그가 다윗에게 나아와 땅에 엎드려 절하매
+                            3   다윗이 그에게 묻되 너는 어디서 왔느냐 하니 대답하되 이스라엘 진영에서 도망하여 왔나이다 하니라
+                            4   다윗이 그에게 이르되 일이 어떻게 되었느냐 너는 내게 말하라 그가 대답하되 군사가 전쟁 중에 도망하기도 하였고 무리 가운데에 엎드러져 죽은 자도 많았고 사울과 그의 아들 요나단도 죽었나이다 하는지라
+                            5   다윗이 자기에게 알리는 청년에게 묻되 사울과 그의 아들 요나단이 죽은 줄을 네가 어떻게 아느냐
+                            6   그에게 알리는 청년이 이르되 내가 우연히 길보아 산에 올라가 보니 사울이 자기 창에 기대고 병거와 기병은 그를 급히 따르는데
+                            7   사울이 뒤로 돌아 나를 보고 부르시기로 내가 대답하되 내가 여기 있나이다 한즉
+                            8   내게 이르되 너는 누구냐 하시기로 내가 그에게 대답하되 나는 아말렉 사람이니이다 한즉
+                            9   또 내게 이르시되 내 목숨이 아직 내게 완전히 있으므로 내가 고통 중에 있나니 청하건대 너는 내 곁에 서서 나를 죽이라 하시기로
+                            10   그가 엎드러진 후에는 살 수 없는 줄을 내가 알고 그의 곁에 서서 죽이고 그의 머리에 있는 왕관과 팔에 있는 고리를 벗겨서 내 주께로 가져왔나이다 하니라
+                            11   이에 다윗이 자기 옷을 잡아 찢으매 함께 있는 모든 사람도 그리하고
+                            12   사울과 그의 아들 요나단과 여호와의 백성과 이스라엘 족속이 칼에 죽음으로 말미암아 저녁 때까지 슬퍼하여 울며 금식하니라
+                        </div>
+                        <div class="verse-reference">사무엘하 1:1-12</div>
+                    </div>
+                </div>
+                </section>
+    
+            <footer class="footer">
+                <p>📚 공과 공부에 도움이 되길 바랍니다 🙏</p>
+            </footer>
+        </div> 
+    </div>
+
+    <script src="menuData.js"></script> 
+    <script>
+        const menuToggleButton = document.getElementById('menuToggleButton');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const overlay = document.querySelector('.overlay');
+        const searchInput = document.getElementById('searchInput');
+        const archiveLinksUl = document.getElementById('archiveLinks');
+
+        // 메뉴 생성 (menuData.js의 weeklyBibleStudies 배열 사용)
+        if (typeof weeklyBibleStudies !== 'undefined' && weeklyBibleStudies.length > 0) {
+            // menuData.js 에 입력된 순서대로 (보통 최신이 위)
+            // 또는 여기서 날짜순 정렬 weeklyBibleStudies.sort((a,b) => new Date(b.date) - new Date(a.date));
+            
+            weeklyBibleStudies.forEach((study, index) => { // index 추가
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = study.file; 
+                link.innerHTML = `<span class="title">${study.title}</span><span class="date">${study.date} - <i>${study.number}</i></span>`;
+                
+                const currentPath = window.location.pathname;
+                const currentFile = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+
+                // index.html 이고, 현재 study가 배열의 첫번째 (최신) 항목이라면 active
+                if ((currentFile === '' || currentFile === 'index.html') && index === 0 && weeklyBibleStudies[0].file === 'index.html') { 
+                     // menuData.js의 첫번째 항목 file이 'index.html'일 경우 index.html에서 활성화
+                    link.classList.add('active-page-link');
+                } else if (currentFile === '' && study.file === weeklyBibleStudies[0].file && index === 0) {
+                    // index.html로 접속했고, study.file이 최신 파일명과 같으면 (menuData.js의 첫번째 항목)
+                     link.classList.add('active-page-link');
+                }
+                // 또는 현재 파일명이 study.file과 일치하면 active
+                else if (currentFile === study.file) {
+                    link.classList.add('active-page-link');
+                }
+
+
+                listItem.appendChild(link);
+                archiveLinksUl.appendChild(listItem);
+            });
+        } else {
+            archiveLinksUl.innerHTML = '<li>메뉴 데이터가 없습니다.</li>';
+        }
+
+        menuToggleButton.addEventListener('click', function() {
+            sidebarMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', function() { 
+            sidebarMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        // 검색 기능 (현재 페이지의 .page-specific-content 내부만 검색)
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const questionGroups = document.querySelectorAll('.page-specific-content .question-group');
+            
+            questionGroups.forEach(group => {
+                const groupText = group.textContent.toLowerCase();
+                if (groupText.includes(searchTerm)) {
+                    group.style.display = 'block'; 
+                    group.style.background = searchTerm ? 'linear-gradient(135deg, #fff5e1 0%, #ffeccf 100%)' : 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+                } else {
+                    group.style.display = searchTerm ? 'none' : 'block'; 
+                    group.style.background = 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+                }
+            });
+        });
+
+        // 기존 구절 클릭 효과
+        document.querySelectorAll('.verse').forEach(verse => {
+            verse.addEventListener('click', function() {
+                this.style.transform = 'scale(1.015)'; 
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)'; 
+                }, 150); 
+            });
+        });
+    </script>
+</body>
+</html>
