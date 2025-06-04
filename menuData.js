@@ -2,7 +2,7 @@
 const weeklyBibleStudies = [
     // 22주차
     { 
-        title: "하나님이 마음에 들어하시는 사람의 인성", 
+        title: "하나님의 마음에 드는 사람이 되는 데 가장 필요한 것", 
         date: "2025년 6월 1일",
         number: "22nd", 
         file: "25-22nd.html"
