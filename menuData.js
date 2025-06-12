@@ -1,5 +1,11 @@
-// menuData.js
 const weeklyBibleStudies = [
+    // 23주차
+    { 
+        title: "악인이 형통함을 볼 때 어떻게 해야 하나?", 
+        date: "2025년 6월 8일",
+        number: "23rd", 
+        file: "25-23rd.html"
+    },
     // 22주차
     { 
         title: "하나님의 마음에 드는 사람이 되는 데 가장 필요한 것", 
