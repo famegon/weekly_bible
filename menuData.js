@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 24주차
+    { 
+        title: "영적으로 자라라", 
+        date: "2025년 6월 15일",
+        number: "24th", 
+        file: "25-24th.html"
+    },
     // 23주차
     { 
         title: "악인이 형통함을 볼 때 어떻게 해야 하나?", 
