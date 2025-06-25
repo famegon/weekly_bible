@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25th</title> 
+    <link rel="stylesheet" href="style.css"> 
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4ZNLXJ9BR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-Z4ZNLXJ9BR');
+    </script>
+</head>
+<body>
+    <button id="menuToggleButton" class="menu-toggle-button">☰</button>
+    <div class="overlay"></div>
+
+    <nav id="sidebarMenu" class="sidebar-menu">
+        <h3>목록</h3>
+        <ul id="archiveLinks">
+            </ul>
+    </nav>
+
+    <div id="mainContentWrapper" class="main-content-wrapper">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="현재 페이지 내용에서 검색..." id="searchInput">
+            </div>
+
+            <section class="page-specific-content"> 
+                <div class="header">
+                    <div class="course-title">빡세지만 기쁜 신앙생활의 비결</div>
+                    <div class="course-date">2025년 6월 22일</div> 
+                    <div class="course-number"><i>25th</i></div>
+                </div>
+    
+                <div class="question-group">
+                    <div class="question-number">본문</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            42   그들이 <span class="highlight-answer">사도의 가르침</span>을 받아 서로 <span class="highlight-answer">교제</span>하고 떡을 떼며 오로지 <span class="highlight-answer">기도</span>하기를 힘쓰니라
+                            43   사람마다 두려워하는데 사도들로 말미암아 기사와 표적이 많이 나타나니
+                            44   믿는 사람이 다 함께 있어 모든 물건을 서로 <span class="highlight-answer">통용</span>하고
+                            45   또 재산과 소유를 팔아 각 사람의 필요를 따라 나눠 주며
+                            46   날마다 마음을 같이하여 성전에 <span class="highlight-answer">모이기를 힘쓰고</span> 집에서 떡을 떼며 <span class="highlight-answer">기쁨과 순전한 마음</span>으로 음식을 먹고
+                            47   하나님을 <span class="highlight-answer">찬미</span>하며 또 온 백성에게 칭송을 받으니 주께서 구원 받는 사람을 <span class="highlight-answer">날마다 더하게</span> 하시니라
+                        </div>
+                        <div class="verse-reference">사도행전 2:42-47</div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-number">1-(14)</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            24   이에 예수께서 제자들에게 이르시되 누구든지 나를 따라오려거든 자기를 부인하고 자기 십자가를 지고 나를 따를 것이니라
+                        </div>
+                        <div class="verse-reference">마태복음 16:24</div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-number">3-(1)</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            13   들어가 그들이 유하는 다락방으로 올라가니 베드로, 요한, 야고보, 안드레와 빌립, 도마와 바돌로매, 마태와 알패오의 아들 야고보, 셀롯인 시몬, 야고보의 아들 유다가 다 거기 있어
+                            14   여자들과 예수의 어머니 마리아와 예수의 아우들과 더불어 마음을 같이하여 오로지 기도에 힘쓰더라
+                        </div>
+                        <div class="verse-reference">사도행전 1:13-14</div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-number">3-(5, 6)</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            40   그들이 옳게 여겨 사도들을 불러들여 채찍질하며 예수의 이름으로 말하는 것을 금하고 놓으니
+                            41   사도들은 그 이름을 위하여 능욕 받는 일에 합당한 자로 여기심을 기뻐하면서 공회 앞을 떠나니라
+                        </div>
+                        <div class="verse-reference">사도행전 5:40-41</div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-number">3-(7, 8)</div>
+                    <div class="verse">
+                        <div class="verse-text">
+                            24   그들이 듣고 한마음으로 하나님께 소리를 높여 이르되 대주재여 천지와 바다와 그 가운데 만물을 지은 이시요
+                            31   빌기를 다하매 모인 곳이 진동하더니 무리가 다 성령이 충만하여 담대히 하나님의 말씀을 전하니라
+                        </div>
+                        <div class="verse-reference">사도행전 4:24,31</div>
+                    </div>
+                </div>
+
+                </section>
+    
+            <footer class="footer">
+                <p>📚 공과 공부에 도움이 되길 바랍니다 🙏</p>
+            </footer>
+        </div> 
+    </div>
+
+    <script src="menuData.js"></script> 
+    <script src="common.js" defer></script> 
+</body>
+</html>
