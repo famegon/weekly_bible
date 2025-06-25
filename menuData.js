@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 25주차
+    { 
+        title: "빡세지만 기쁜 신앙생활의 비결", 
+        date: "2025년 6월 22일",
+        number: "25th", 
+        file: "25-25th.html"
+    },
     // 24주차
     { 
         title: "영적으로 자라라", 
