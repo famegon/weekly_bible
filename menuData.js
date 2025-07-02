@@ -4,7 +4,7 @@ const weeklyBibleStudies = [
         title: "가짜 기독교와 진짜 기독교",
         date: "2025년 6월 29일",
         number: "26th",
-        file: "26-26th.html"
+        file: "25-26th.html"
     },
     // 25주차
     {
