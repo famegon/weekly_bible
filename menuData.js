@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 27주차
+    {
+        title: "하나님의 자녀는 왜 복된가",
+        date: "2025년 7월 6일",
+        number: "27th",
+        file: "25-27th.html"
+    },
     // 26주차
     {
         title: "가짜 기독교와 진짜 기독교",
