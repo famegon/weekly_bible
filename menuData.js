@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 28주차
+    {
+        title: "마음의 시온의 대로가 있는 자",
+        date: "2025년 7월 13일",
+        number: "28th",
+        file: "25-28th.html"
+    },
     // 27주차
     {
         title: "하나님의 자녀는 왜 복된가",
