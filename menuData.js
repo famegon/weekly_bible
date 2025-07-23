@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 29주차
+    {
+        title: "경제적으로 어려울 때 헌금을 어떻게 해야 하나",
+        date: "2025년 7월 20일",
+        number: "29th",
+        file: "25-29th.html"
+    },
     // 28주차
     {
         title: "마음의 시온의 대로가 있는 자",
