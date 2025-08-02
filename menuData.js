@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 30주차
+    {
+        title: "기뻐하라",
+        date: "2025년 7월 27일",
+        number: "30th",
+        file: "25-30th.html"
+    },
     // 29주차
     {
         title: "경제적으로 어려울 때 헌금을 어떻게 해야 하나",
