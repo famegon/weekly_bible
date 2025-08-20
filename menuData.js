@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 33주차
+    {
+        title: "현숙한 여인은 어떤 사람인가",
+        date: "2025년 8월 17일",
+        number: "33rd",
+        file: "25-33rd.html"
+    },
     // 30주차
     {
         title: "기뻐하라",
