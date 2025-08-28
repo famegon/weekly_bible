@@ -1,4 +1,10 @@
 const weeklyBibleStudies = [
+    // 34주차
+    {
+        title: "어떤 사람이 하나님에게 쓰임받나",
+        date: "2025년 8월 24일",
+        number: "34th",
+        file: "25-34th.html"
     // 33주차
     {
         title: "현숙한 여인은 어떤 사람인가",
