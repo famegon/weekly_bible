@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 35주차
+    {
+        title: "예배를 늘 드리는데 왜 불통할까?",
+        date: "2025년 8월 31일",
+        number: "35th",
+        file: "25-35th.html"
+    },
     // 34주차
     {
         title: "어떤 사람이 하나님에게 쓰임받나",
