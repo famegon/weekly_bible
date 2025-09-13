@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 36주차
+    {
+        title: "복음에 합당하게 살라",
+        date: "2025년 9월 7일",
+        number: "36th",
+        file: "25-36th.html"
+    },
     // 35주차
     {
         title: "예배를 늘 드리는데 왜 불통할까?",
