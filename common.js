@@ -118,11 +118,12 @@ function handleSearch() {
 
         group.style.display = isMatch ? 'block' : 'none';
         
-        // 검색어가 있을 때 일치하는 항목에 배경색 하이라이트 적용
+        // 검색어가 있을 때 일치하는 항목에 배경색 하이라이트 적용하고, 없으면 원래대로
         if (isMatch && searchTerm) {
             group.style.background = 'linear-gradient(135deg, #fff5e1 0%, #ffeccf 100%)';
         } else {
-            group.style.background = 'linear-gradient(135deg, #fdfbf7 0%, #f7f2ec 100%)';
+            // 검색어가 없을 때는 background 스타일을 제거하여 CSS에 정의된 스타일로 돌아가게 함
+            group.style.background = '';
         }
     });
 }
