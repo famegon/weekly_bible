@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 37주차
+    {
+        title: "우리는 하나님의 증인입니다",
+        date: "2025년 9월 14일",
+        number: "37th",
+        file: "25-37th.html"
+    },
     // 36주차
     {
         title: "복음에 합당하게 살라",
