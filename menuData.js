@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 39주차
+    {
+        title: "힘든 때에도 잘 되려면",
+        date: "2025년 9월 28일",
+        number: "39th",
+        file: "25-39th.html"
+    },
     // 37주차
     {
         title: "우리는 하나님의 증인입니다",
