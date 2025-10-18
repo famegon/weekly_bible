@@ -1,5 +1,12 @@
 const weeklyBibleStudies = [
-    // 39주차
+    // 41주차
+    {
+        title: "레갑 사람들에게 받아야 하는 교훈",
+        date: "2025년 10월 12일",
+        number: "41st",
+        file: "25-41st.html"
+    },
+    // 39주차 (기존 내용)
     {
         title: "힘든 때에도 잘 되려면",
         date: "2025년 9월 28일",
