@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 42주차
+    {
+        title: "거짓교사들을 원천봉쇄하려면",
+        date: "2025년 10월 19일",
+        number: "42nd",
+        file: "25-42nd.html"
+    },
     // 41주차
     {
         title: "레갑 사람들에게 받아야 하는 교훈",
