@@ -1,4 +1,11 @@
 const weeklyBibleStudies = [
+    // 44주차
+    {
+        title: "좋은 날 보기를 원하면",
+        date: "2025년 11월 2일",
+        number: "44th",
+        file: "25-44th.html"
+    },
     // 42주차
     {
         title: "거짓교사들을 원천봉쇄하려면",
